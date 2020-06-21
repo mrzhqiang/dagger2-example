@@ -1,17 +1,20 @@
 package com.github.mrzhqiang.dagger2_example.account;
 
 import androidx.annotation.NonNull;
+import java.util.Date;
+import javax.inject.Inject;
 
 public class Account {
   public String username;
   public String password;
 
-  private final User user;
+  @Inject
+  public Date current;
 
-  public Account(User user) {
+  @Inject
+  public Account() {
     this.username = "fssd";
     this.password = "123456";
-    this.user = user;
   }
 
   @NonNull
@@ -19,7 +22,7 @@ public class Account {
     return "Account{" +
         "username='" + username + '\'' +
         ", password='" + password + '\'' +
-        ", user=" + user +
+        ", current=" + current +
         '}';
   }
 }
