@@ -1,5 +1,6 @@
 package com.github.mrzhqiang.dagger2_example;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -7,6 +8,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mrzhqiang.dagger2_example.account.Account;
+import com.github.mrzhqiang.dagger2_example.di.ActivityComponent;
+import com.github.mrzhqiang.dagger2_example.di.DaggerActivityComponent;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -19,23 +22,29 @@ public class MainActivity extends AppCompatActivity {
     PasswordEncoder passwordEncoder;
     @Inject
     Gson gson;
-    @Inject
-    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActivityComponent component = DaggerActivityComponent.create();
+        component.inject(this);
 
-        String accountJson = preferences.getString("account", null);
+        SharedPreferences preferences = getSharedPreferences("account", Context.MODE_PRIVATE);
+        String accountJson = preferences.getString("current", null);
+        Account account;
         if (accountJson != null) {
-            Account account = gson.fromJson(accountJson, Account.class);
-            TextView contentText = findViewById(R.id.content_text);
-            String content = String.format("username: %s, password: %s, encodePassword: %s",
-                    account.username,
-                    account.password,
-                    passwordEncoder.encode(account.password));
-            contentText.setText(content);
+            account = gson.fromJson(accountJson, Account.class);
+        } else {
+            account = component.account();
+            preferences.edit().putString("current", gson.toJson(account)).apply();
         }
+
+        TextView contentText = findViewById(R.id.content_text);
+        String content = String.format("username: %s, password: %s, encodePassword: %s",
+                account.username,
+                account.password,
+                passwordEncoder.encode(account.password));
+        contentText.setText(content);
     }
 }
