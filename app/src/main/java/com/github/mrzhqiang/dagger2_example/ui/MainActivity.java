@@ -1,15 +1,17 @@
-package com.github.mrzhqiang.dagger2_example;
+package com.github.mrzhqiang.dagger2_example.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.mrzhqiang.dagger2_example.DaggerApplication;
+import com.github.mrzhqiang.dagger2_example.R;
 import com.github.mrzhqiang.dagger2_example.account.Account;
 import com.github.mrzhqiang.dagger2_example.di.ActivityComponent;
-import com.github.mrzhqiang.dagger2_example.di.DaggerActivityComponent;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActivityComponent component = DaggerActivityComponent.create();
+        ActivityComponent component = DaggerApplication.ofComponent(this);
         component.inject(this);
 
         SharedPreferences preferences = getSharedPreferences("account", Context.MODE_PRIVATE);
@@ -46,5 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 account.password,
                 passwordEncoder.encode(account.password));
         contentText.setText(content);
+
+        startActivity(new Intent(this, AccountActivity.class));
     }
 }

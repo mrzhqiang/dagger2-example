@@ -1,6 +1,6 @@
 package com.github.mrzhqiang.dagger2_example.di;
 
-import com.github.mrzhqiang.dagger2_example.MainActivity;
+import com.github.mrzhqiang.dagger2_example.ui.MainActivity;
 import com.github.mrzhqiang.dagger2_example.account.Account;
 
 import dagger.Component;
