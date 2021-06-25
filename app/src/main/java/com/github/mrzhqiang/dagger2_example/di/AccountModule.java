@@ -2,6 +2,9 @@ package com.github.mrzhqiang.dagger2_example.di;
 
 import com.github.mrzhqiang.dagger2_example.account.Account;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import javax.inject.Named;
 
 import cn.mrzhqiang.security.crypto.factory.PasswordEncoderFactories;
 import cn.mrzhqiang.security.crypto.password.PasswordEncoder;
@@ -23,9 +26,17 @@ final class AccountModule {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    @ActivityScoped
+//    @ActivityScoped
     @Provides
     Gson provideGson() {
         return new Gson();
+    }
+
+    @Named("pretty")
+    @Provides
+    Gson providePrettyGson() {
+        return new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
     }
 }
