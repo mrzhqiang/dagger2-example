@@ -25,7 +25,7 @@ public class AccountLocalDataSource implements DataSource<String, Account> {
 
     @Override
     public boolean save(Account data) {
-        local.put(data.username, data);
+        local.put(data.getUsername(), data);
         return true;
     }
 

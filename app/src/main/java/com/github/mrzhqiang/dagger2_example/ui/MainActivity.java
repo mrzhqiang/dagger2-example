@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
         TextView contentText = findViewById(R.id.content_text);
         String content = String.format("username: %s, password: %s, encodePassword: %s",
-                account.username,
-                account.password,
-                passwordEncoder.encode(account.password));
+                account.getUsername(),
+                account.getPassword(),
+                passwordEncoder.encode(account.getPassword()));
         contentText.setText(content);
 
         startActivity(new Intent(this, AccountActivity.class));

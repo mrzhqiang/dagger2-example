@@ -30,7 +30,7 @@ public class AccountRemoteDataSource implements DataSource<String, Account> {
     @Override
     public boolean save(Account data) {
         delay();
-        remoteAccount.put(data.username, data);
+        remoteAccount.put(data.getUsername(), data);
         return true;
     }
 

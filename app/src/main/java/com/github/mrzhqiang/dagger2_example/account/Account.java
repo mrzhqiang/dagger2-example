@@ -8,12 +8,28 @@ public class Account {
 
     private static final String NUMBER = "1234567890";
 
-    public String username;
-    public String password;
+    private String username;
+    private String password;
 
     public Account() {
         this.username = randomNumber(4);
         this.password = randomNumber(6);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     private String randomNumber(int length) {
