@@ -1,6 +1,5 @@
-package com.github.mrzhqiang.dagger2_example.data.source.local;
+package com.github.mrzhqiang.dagger2_example.account;
 
-import com.github.mrzhqiang.dagger2_example.account.Account;
 import com.github.mrzhqiang.dagger2_example.data.DataSource;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class AccountLocalDataSource implements DataSource<String, Account> {
+final class AccountLocalDataSource implements DataSource<String, Account> {
 
     private final Map<String, Account> local = new ConcurrentHashMap<>();
 

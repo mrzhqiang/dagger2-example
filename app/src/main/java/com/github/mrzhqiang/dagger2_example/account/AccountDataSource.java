@@ -1,14 +1,15 @@
-package com.github.mrzhqiang.dagger2_example.data.source;
+package com.github.mrzhqiang.dagger2_example.account;
 
-import com.github.mrzhqiang.dagger2_example.account.Account;
 import com.github.mrzhqiang.dagger2_example.data.DataSource;
+import com.github.mrzhqiang.dagger2_example.data.LocalDataSource;
+import com.github.mrzhqiang.dagger2_example.data.RemoteDataSource;
 
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
 
-public class AccountDataSource implements DataSource<String, Account> {
+final class AccountDataSource implements DataSource<String, Account> {
 
     @LocalDataSource
     @Inject

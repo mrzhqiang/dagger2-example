@@ -1,6 +1,5 @@
-package com.github.mrzhqiang.dagger2_example.data.source.remote;
+package com.github.mrzhqiang.dagger2_example.account;
 
-import com.github.mrzhqiang.dagger2_example.account.Account;
 import com.github.mrzhqiang.dagger2_example.data.DataSource;
 
 import java.util.ArrayList;
@@ -10,7 +9,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-public class AccountRemoteDataSource implements DataSource<String, Account> {
+final class AccountRemoteDataSource implements DataSource<String, Account> {
+
     private static final long DELAY = TimeUnit.SECONDS.toMillis(2);
 
     private final Map<String, Account> remoteAccount = new LinkedHashMap<>();

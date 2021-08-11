@@ -3,21 +3,24 @@ package com.github.mrzhqiang.dagger2_example;
 import android.app.Application;
 import android.content.Context;
 
-import com.github.mrzhqiang.dagger2_example.di.ActivityComponent;
-import com.github.mrzhqiang.dagger2_example.di.DaggerActivityComponent;
+import com.github.mrzhqiang.dagger2_example.di.AppComponent;
+import com.github.mrzhqiang.dagger2_example.di.AppModule;
+import com.github.mrzhqiang.dagger2_example.di.DaggerAppComponent;
 
-public class DaggerApplication extends Application {
+public final class DaggerApplication extends Application {
 
-    private ActivityComponent component;
+    private AppComponent component;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        component = DaggerActivityComponent.create();
+        this.component = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 
-    public static ActivityComponent ofComponent(Context context) {
+    public static AppComponent ofComponent(Context context) {
         return ((DaggerApplication) context.getApplicationContext()).component;
     }
 }
